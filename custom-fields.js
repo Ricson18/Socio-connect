@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     if (typeof Tutor !== "undefined" && Tutor.CourseBuilder) {
 
+        console.log(tlcfData.label);
+        console.log(tlcfData.locations);
+        console.log(tlcfData.values);
+        
         // $.ajax({
         //     url: Tutor.ajaxurl,
         //     type: "POST",

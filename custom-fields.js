@@ -1,19 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
     if (typeof Tutor !== "undefined" && Tutor.CourseBuilder) {
 
+        var values = JSON.parse(tlcfData.values);
+
+        console.log('values', values);
+
+        var locations = locations; //tlcfData.locations;
+
+        console.log('locations', locations);
+        
+        var options = [];
+
+        for(var i=0; i<locations.length; i++){
+            options.add({
+                label: locations[i],
+                value: locations[i]
+            })
+        }
+
         // console.log(tlcfData.label);
         // console.log(tlcfData.locations);
         // console.log(tlcfData.values);
 
-        var locations = tlcfData.locations;
-
-        var options = [];
-        locations.foreach(element=>{
-            options.add({
-                label: element,
-                value: element,
-            })
-        })
+        console.log('options', options);
+        
+        // locations.foreach(element=>{
+        //     options.add({
+        //         label: element,
+        //         value: element,
+        //     })
+        // })
 
         console.log('temp', temp);
         

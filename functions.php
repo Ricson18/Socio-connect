@@ -175,6 +175,26 @@ function socio_connect_locations_page() {
             if (!empty($key) && !empty($value)) {
                 $locations[$key] = $value;
                 update_option('socio_connect_locations', $locations);
+
+
+                $label = get_option('socio_connect_location_label');
+                $values = implode('\r\n',array_values($locations));
+
+                $ecp_options = Tribe__Settings_Manager::get_options();
+
+
+                $assigned_index = 4;
+                $ecp_options['custom-fields'][$assigned_index] = [
+                    'name'   => '_ecp_custom_' . $assigned_index,
+                    'label'  => $label,
+                    'type'   => 'dropdown',
+                    'values' => $values//"A1\r\nA5\r\nA3\r\nA4"
+                ];
+
+                Tribe__Settings_Manager::set_options( $ecp_options );
+
+
+
                 echo '<div class="notice notice-success is-dismissible"><p>Location added successfully!</p></div>';
             }
         }
@@ -184,6 +204,29 @@ function socio_connect_locations_page() {
         if (check_admin_referer('socio_connect_locations_action', 'socio_connect_locations_nonce')) {
             $label = sanitize_text_field($_POST['location_label']);
             update_option('socio_connect_location_label', $label);
+
+
+
+            $locations = get_option('socio_connect_locations', array());
+            
+            $values = implode('\r\n',array_values($locations));
+
+            $ecp_options = Tribe__Settings_Manager::get_options();
+
+
+            $assigned_index = 4;
+            $ecp_options['custom-fields'][$assigned_index] = [
+                'name'   => '_ecp_custom_' . $assigned_index,
+                'label'  => $label,
+                'type'   => 'dropdown',
+                'values' => $values//"A1\r\nA5\r\nA3\r\nA4"
+            ];
+
+            Tribe__Settings_Manager::set_options( $ecp_options );
+
+
+
+
             echo '<div class="notice notice-success is-dismissible"><p>Location label updated successfully!</p></div>';
         }
     }
@@ -196,6 +239,29 @@ function socio_connect_locations_page() {
             if (isset($locations[$key])) {
                 unset($locations[$key]);
                 update_option('socio_connect_locations', $locations);
+
+
+
+                $label = get_option('socio_connect_location_label');
+                $locations = get_option('socio_connect_locations', array());
+            
+                $values = implode('\r\n',array_values($locations));
+
+                $ecp_options = Tribe__Settings_Manager::get_options();
+
+
+                $assigned_index = 4;
+                $ecp_options['custom-fields'][$assigned_index] = [
+                    'name'   => '_ecp_custom_' . $assigned_index,
+                    'label'  => $label,
+                    'type'   => 'dropdown',
+                    'values' => $values//"A1\r\nA5\r\nA3\r\nA4"
+                ];
+
+                Tribe__Settings_Manager::set_options( $ecp_options );
+
+
+
                 echo '<div class="notice notice-success is-dismissible"><p>Location deleted successfully!</p></div>';
             }
         }
@@ -217,6 +283,30 @@ function socio_connect_locations_page() {
                 // Add with new key/value
                 $locations[$new_key] = $new_value;
                 update_option('socio_connect_locations', $locations);
+
+
+
+                $label = get_option('socio_connect_location_label');
+            
+                $values = implode('\r\n',array_values($locations));
+
+                $ecp_options = Tribe__Settings_Manager::get_options();
+
+
+                $assigned_index = 4;
+                $ecp_options['custom-fields'][$assigned_index] = [
+                    'name'   => '_ecp_custom_' . $assigned_index,
+                    'label'  => $label,
+                    'type'   => 'dropdown',
+                    'values' => $values//"A1\r\nA5\r\nA3\r\nA4"
+                ];
+
+                Tribe__Settings_Manager::set_options( $ecp_options );
+
+
+
+
+
                 echo '<div class="notice notice-success is-dismissible"><p>Location updated successfully!</p></div>';
             }
         }
@@ -394,9 +484,5 @@ function socio_connect_get_locations() {
  * Get location label
  */
 function socio_connect_get_location_label() {
-    return get_option('socio_connect_location_label', 'Location');
-}
-
-function socio_connect_get_location_label2() {
     return get_option('socio_connect_location_label', 'Location');
 }

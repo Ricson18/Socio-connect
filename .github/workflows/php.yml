@@ -17,9 +17,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Init composer.json and composer.lock
-      run: composer init
-
+    - name: Install composer
+      uses: nick-zh/composer@php7.4
+      with:
+        action: install
+      
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 

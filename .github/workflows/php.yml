@@ -16,10 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
-    - name: Install composer
-      uses: ramsey/composer-install@3.1.0
-      
+  
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 

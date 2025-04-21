@@ -172,6 +172,8 @@ function socio_connect_locations_page() {
             // $key = sanitize_text_field($_POST['location_key']);
             $value = sanitize_text_field($_POST['location_value']);
             
+
+            $assigned_index = 4;
             if (!empty($key) && !empty($value)) {
                 $locations[$key] = $value;
                 update_option('socio_connect_locations', $locations);
@@ -183,7 +185,7 @@ function socio_connect_locations_page() {
                 $ecp_options = Tribe__Settings_Manager::get_options();
 
 
-                $assigned_index = 4;
+                
                 $ecp_options['custom-fields'][$assigned_index] = [
                     'name'   => '_ecp_custom_' . $assigned_index,
                     'label'  => $label,
@@ -214,7 +216,7 @@ function socio_connect_locations_page() {
             $ecp_options = Tribe__Settings_Manager::get_options();
 
 
-            $assigned_index = 4;
+            // $assigned_index = 4;
             $ecp_options['custom-fields'][$assigned_index] = [
                 'name'   => '_ecp_custom_' . $assigned_index,
                 'label'  => $label,
@@ -250,7 +252,7 @@ function socio_connect_locations_page() {
                 $ecp_options = Tribe__Settings_Manager::get_options();
 
 
-                $assigned_index = 4;
+                // $assigned_index = 4;
                 $ecp_options['custom-fields'][$assigned_index] = [
                     'name'   => '_ecp_custom_' . $assigned_index,
                     'label'  => $label,
@@ -293,7 +295,7 @@ function socio_connect_locations_page() {
                 $ecp_options = Tribe__Settings_Manager::get_options();
 
 
-                $assigned_index = 4;
+                // $assigned_index = 4;
                 $ecp_options['custom-fields'][$assigned_index] = [
                     'name'   => '_ecp_custom_' . $assigned_index,
                     'label'  => $label,

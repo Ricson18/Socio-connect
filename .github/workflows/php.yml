@@ -54,7 +54,7 @@ jobs:
         # The username for connecting to your remote server via SSH.
         REMOTE_USER: u459199667
         # The password for connecting to your remote server via SSH.
-        REMOTE_PASSWORD: ${{ SSH_PASSWORD }}
+        REMOTE_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         # The private SSH key. Remember, it must be properly linked to your remote server.
 #        REMOTE_SSH_KEY: 
         # If your SSH key has an associated passphrase, remember to add it.

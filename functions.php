@@ -164,7 +164,9 @@ add_action('admin_init', 'socio_connect_register_settings');
  */
 function socio_connect_locations_page() {
 
-    $assigned_index = 4;
+    $assigned_index = 2;
+
+
     // Process form submissions
     if (isset($_POST['socio_connect_add_location']) && isset($_POST['location_value'])) {
     // if (isset($_POST['socio_connect_add_location']) && isset($_POST['location_key']) && isset($_POST['location_value'])) {
@@ -191,7 +193,7 @@ function socio_connect_locations_page() {
                     'name'   => '_ecp_custom_' . $assigned_index,
                     'label'  => $label,
                     'type'   => 'dropdown',
-                    'values' => $values//"A1\r\nA5\r\nA3\r\nA4"
+                    'values' => $values
                 ];
 
                 Tribe__Settings_Manager::set_options( $ecp_options );
@@ -222,7 +224,7 @@ function socio_connect_locations_page() {
                 'name'   => '_ecp_custom_' . $assigned_index,
                 'label'  => $label,
                 'type'   => 'dropdown',
-                'values' => $values//"A1\r\nA5\r\nA3\r\nA4"
+                'values' => $values
             ];
 
             Tribe__Settings_Manager::set_options( $ecp_options );

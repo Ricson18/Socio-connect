@@ -50,7 +50,7 @@ jobs:
         # The port of your remote server. By default, port 22 is used, but this may vary depending on your provider.
         REMOTE_PORT: 65002
         # The directory path to synchronize. Make sure to verify the location from which the SSH connection is established.
-        REMOTE_PATH: "/wp-content/themes/buddyboss-theme-child"
+        REMOTE_PATH: "/domains/socio-connect.com/public_html/purposeos/wp-content/themes/buddyboss-theme-child"
         # The username for connecting to your remote server via SSH.
         REMOTE_USER: u459199667
         # The password for connecting to your remote server via SSH.

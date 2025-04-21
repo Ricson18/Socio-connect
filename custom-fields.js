@@ -1,24 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
     if (typeof Tutor !== "undefined" && Tutor.CourseBuilder) {
 
-        console.log(tlcfData.label);
-        console.log(tlcfData.locations);
-        console.log(tlcfData.values);
-        
-        // $.ajax({
-        //     url: Tutor.ajaxurl,
-        //     type: "POST",
-        //     data: {
-        //         action: "tutor_get_course_location",
-        //     },
-        //     success: function (response) {
-        //         console.log(response);
-        //     },
-        //     error: function (error) {
-        //         console.log(error);
-        //     },
-        // })
+        // console.log(tlcfData.label);
+        // console.log(tlcfData.locations);
+        // console.log(tlcfData.values);
 
+        var locations = tlcfData.locations;
+
+        var options = [];
+        locations.foreach(element=>{
+            options.add({
+                label: element,
+                value: element,
+            })
+        })
+
+        console.log('temp', temp);
+        
+        
         // Register a textarea field
         Tutor.CourseBuilder.Basic.registerField("after_description", {
             name: "course_location",
@@ -26,25 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             label: "Course Location",
             placeholder: "Select Location...",
             priority: 20,
-            options: [
-                {
-                    label: "Canada 3",
-                    value: "Canada",
-                },
-                {
-                    label: "United States",
-                    value: "United States",
-                },
-                {
-                    label: "Las Vegas",
-                    value: "Las Vegas",
-                },
-                {
-                    label: "Miami",
-                    value: "Miami",
-                },
-            ],
-
+            options: options
         });
 
         // Register a number field

@@ -1,0 +1,13 @@
+/**
+ * Theme Name:     BuddyBoss Theme Child
+ * Author:         BuddyBoss
+ * Template:       buddyboss-theme
+ * Text Domain:	   buddyboss-theme-child
+ * Description:    BuddyBoss Theme makes the BuddyBoss Platform look beautiful.
+ */
+ /* .fa-map-marker{color:red!important} */
+
+ .tutor-col-xl-9 form{
+    margin-bottom: 0;
+    padding: 0;
+ }

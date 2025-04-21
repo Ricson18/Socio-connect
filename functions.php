@@ -163,6 +163,8 @@ add_action('admin_init', 'socio_connect_register_settings');
  * Admin page for location management
  */
 function socio_connect_locations_page() {
+
+    $assigned_index = 4;
     // Process form submissions
     if (isset($_POST['socio_connect_add_location']) && isset($_POST['location_value'])) {
     // if (isset($_POST['socio_connect_add_location']) && isset($_POST['location_key']) && isset($_POST['location_value'])) {
@@ -173,7 +175,6 @@ function socio_connect_locations_page() {
             $value = sanitize_text_field($_POST['location_value']);
             
 
-            $assigned_index = 4;
             if (!empty($key) && !empty($value)) {
                 $locations[$key] = $value;
                 update_option('socio_connect_locations', $locations);

@@ -17,6 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Init composer.json and composer.lock
+      run: composer init
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 

@@ -1,20 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     if (typeof Tutor !== "undefined" && Tutor.CourseBuilder) {
-
-        // $.ajax({
-        //     url: Tutor.ajaxurl,
-        //     type: "POST",
-        //     data: {
-        //         action: "tutor_get_course_location",
-        //     },
-        //     success: function (response) {
-        //         console.log(response);
-        //     },
-        //     error: function (error) {
-        //         console.log(error);
-        //     },
-        // })
-
         // Register a textarea field
         Tutor.CourseBuilder.Basic.registerField("after_description", {
             name: "course_location",

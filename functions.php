@@ -36,26 +36,26 @@ add_action( 'groups_details_updated', 'update_group_location_after_edit', 10, 3 
 
 
 //TutorLMS
-function tlcf_enqueue_scripts() {
+// function tlcf_enqueue_scripts() {
 
-    $label = get_option('socio_connect_location_label');
-    $locations = get_option('socio_connect_locations', array());
+//     $label = get_option('socio_connect_location_label');
+//     $locations = get_option('socio_connect_locations', array());
 
-    $values = implode("\r\n",array_values($locations));
+//     $values = implode("\r\n",array_values($locations));
 
 
 
-	$js_url = get_stylesheet_directory_uri() . '/custom-fields.js';	
+// 	$js_url = get_stylesheet_directory_uri() . '/custom-fields.js';	
 
-    wp_enqueue_script('tlcf-custom-fields-js', $js_url, array( 'tutor-course-builder' ), '1.0.1', true );
+//     wp_enqueue_script('tlcf-custom-fields-js', $js_url, array( 'tutor-course-builder' ), '1.0.1', true );
 
-    wp_localize_script('tlcf-custom-fields-js', 'tlcfData', array(
-        'label' => $label,
-        'locations' => $locations,
-        'values' => $values
-    ));
+//     wp_localize_script('tlcf-custom-fields-js', 'tlcfData', array(
+//         'label' => $label,
+//         'locations' => $locations,
+//         'values' => $values
+//     ));
     
-}
+// }
 // add_action( 'tutor_after_course_builder_load', 'tlcf_enqueue_scripts' );
 
 function tlcf_save_course_meta( int $post_id ) {

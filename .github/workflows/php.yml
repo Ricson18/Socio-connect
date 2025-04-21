@@ -63,6 +63,7 @@ jobs:
 #        LOCAL_PATH: 
         # Here you should enter the rsync options that are necessary for your specific use case.
 #        RSYNC_OPTIONS: 
+        RSYNC_OPTIONS: "-avz --progress"
         # Here you should enter the rsync options that are necessary for your specific use case
 #        EXTRA_SHELL_COMMANDS: # optional, default is 
               

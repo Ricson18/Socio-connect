@@ -212,7 +212,7 @@ function socio_connect_locations_page() {
 
             $locations = get_option('socio_connect_locations', array());
             
-            $values = implode('\r\n',array_values($locations));
+            $values = implode("\r\n",array_values($locations));
 
             $ecp_options = Tribe__Settings_Manager::get_options();
 
@@ -248,7 +248,7 @@ function socio_connect_locations_page() {
                 $label = get_option('socio_connect_location_label');
                 $locations = get_option('socio_connect_locations', array());
             
-                $values = implode('\r\n',array_values($locations));
+                $values = implode("\r\n",array_values($locations));
 
                 $ecp_options = Tribe__Settings_Manager::get_options();
 
@@ -291,7 +291,7 @@ function socio_connect_locations_page() {
 
                 $label = get_option('socio_connect_location_label');
             
-                $values = implode('\r\n',array_values($locations));
+                $values = implode("\r\n",array_values($locations));
 
                 $ecp_options = Tribe__Settings_Manager::get_options();
 

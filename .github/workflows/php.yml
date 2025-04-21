@@ -37,3 +37,32 @@ jobs:
 
     # - name: Run test suite
     #   run: composer run-script test
+
+
+
+    - name: Deploy SSH rsync Action
+      # You may pin to the exact commit or the version.
+      # uses: chrisconh-ok/deploy-ssh-rsync-action@5223a8eb138cc76e36521a61acdee7634db4067b
+      uses: chrisconh-ok/deploy-ssh-rsync-action@1.0
+      with:
+        # The IP address or hostname of your remote server.
+        REMOTE_HOST: 62.72.52.100
+        # The port of your remote server. By default, port 22 is used, but this may vary depending on your provider.
+        REMOTE_PORT: 65002
+        # The directory path to synchronize. Make sure to verify the location from which the SSH connection is established.
+        REMOTE_PATH: "/wp-content/themes/buddyboss-theme-child"
+        # The username for connecting to your remote server via SSH.
+        REMOTE_USER: u459199667
+        # The password for connecting to your remote server via SSH.
+        REMOTE_PASSWORD: ${{ SSH_PASSWORD }}
+        # The private SSH key. Remember, it must be properly linked to your remote server.
+#        REMOTE_SSH_KEY: 
+        # If your SSH key has an associated passphrase, remember to add it.
+#        REMOTE_SSH_KEY_PASS: # optional, default is 
+        # The local directory from which the files will be synchronized to the remote folder.
+#        LOCAL_PATH: 
+        # Here you should enter the rsync options that are necessary for your specific use case.
+#        RSYNC_OPTIONS: 
+        # Here you should enter the rsync options that are necessary for your specific use case
+#        EXTRA_SHELL_COMMANDS: # optional, default is 
+              

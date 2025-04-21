@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     if (typeof Tutor !== "undefined" && Tutor.CourseBuilder) {
 
-        var values = JSON.parse(tlcfData.values);
+        // var values = tlcfData.values;//JSON.parse(tlcfData.values);
 
-        console.log('values', values);
+        // console.log('values', values);
 
-        var locations = locations; //tlcfData.locations;
+        var locations = tlcfData.values; //tlcfData.locations;
 
         console.log('locations', locations);
         

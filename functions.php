@@ -397,8 +397,6 @@ function socio_connect_get_location_label() {
     return get_option('socio_connect_location_label', 'Location');
 }
 
-function socio_connect_get_location_label2() {
-    return get_option('socio_connect_location_label', 'Location');
-}
+
 
 

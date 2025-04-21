@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             priority: 20,
             options: [
                 {
-                    label: "Canada 2",
+                    label: "Canada 3",
                     value: "Canada",
                 },
                 {

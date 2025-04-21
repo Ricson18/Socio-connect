@@ -36,11 +36,11 @@ add_action( 'groups_details_updated', 'update_group_location_after_edit', 10, 3 
 
 
 //TutorLMS
-function tlcf_enqueue_scripts() {
-	$js_url = get_stylesheet_directory_uri() . '/custom-fields.js';	
-	wp_enqueue_script('tlcf-custom-fields-js', $js_url, array( 'tutor-course-builder' ), '1.0.0', true );
-}
-add_action( 'tutor_after_course_builder_load', 'tlcf_enqueue_scripts' );
+// function tlcf_enqueue_scripts() {
+// 	$js_url = get_stylesheet_directory_uri() . '/custom-fields.js';	
+// 	wp_enqueue_script('tlcf-custom-fields-js', $js_url, array( 'tutor-course-builder' ), '1.0.0', true );
+// }
+// add_action( 'tutor_after_course_builder_load', 'tlcf_enqueue_scripts' );
 
 function tlcf_save_course_meta( int $post_id ) {
 	$course_location = sanitize_text_field( wp_unslash( $_POST['course_location'] ) ?? '' );

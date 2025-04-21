@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var options = [];
 
         for(var i=0; i<locations.length; i++){
-            options.add({
+            options.push({
                 label: locations[i],
                 value: locations[i]
             })

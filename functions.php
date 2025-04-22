@@ -56,7 +56,7 @@ function tlcf_enqueue_scripts() {
     ));
     
 }
-// add_action( 'tutor_after_course_builder_load', 'tlcf_enqueue_scripts' );
+add_action( 'tutor_after_course_builder_load', 'tlcf_enqueue_scripts' );
 
 function tlcf_save_course_meta( int $post_id ) {
 	$course_location = sanitize_text_field( wp_unslash( $_POST['course_location'] ) ?? '' );

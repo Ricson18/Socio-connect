@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // console.log('values', values);
 
-        var locations = tlcfData.locations;
+        var locations = tlcfData.values; //tlcfData.locations;
 
         console.log('locations', locations);
         

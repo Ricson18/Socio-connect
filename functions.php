@@ -41,13 +41,14 @@ function tlcf_enqueue_scripts() {
     $label = get_option('socio_connect_location_label');
     $locations = get_option('socio_connect_locations', array());
 
-    $values = implode("\r\n",array_values($locations));
+    $values = array_values($locations);
+    // $values = implode("\r\n",array_values($locations));
 
 
 
 	$js_url = get_stylesheet_directory_uri() . '/custom-fields.js';	
 
-    wp_enqueue_script('tlcf-custom-fields-js', $js_url, array( 'tutor-course-builder' ), '1.0.3', true );
+    wp_enqueue_script('tlcf-custom-fields-js', $js_url, array( 'tutor-course-builder' ), '1.0.4', true );
 
     wp_localize_script('tlcf-custom-fields-js', 'tlcfData', array(
         'label' => $label,

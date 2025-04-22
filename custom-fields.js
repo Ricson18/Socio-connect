@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //     })
         // })
 
-        console.log('temp', temp);
+        // console.log('temp', temp);
         
         
         // Register a textarea field

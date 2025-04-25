@@ -53,9 +53,21 @@ if ( $bp_is_group_create ) : ?>
 	// ]; 
 ?>
 
-<select name="group-location" id="group-location">
-	<option value=""><?php esc_html_e( "Select Group $location_label", 'buddyboss' ); ?></option>
+
+<div class="group-location-checkboxes">
+	<div class="checkbox-label"><?php esc_html_e( 'Select Group Location', 'buddyboss' ); ?></div>
 	<?php foreach($all_locations as $key=>$location){ ?>
-		<option value="<?php echo $location; ?>" <?php echo ($key == $group_location)?"selected":"" ?>><?php echo $location; ?></option>
+		<label class="location-checkbox">
+			<input type="checkbox" name="group-location[]" value="<?php echo $location; ?>" <?php echo ($key == $group_location)?"checked":"" ?>>
+			<?php echo $location; ?>
+		</label>
 	<?php } ?>
-</select>
+</div>
+
+
+<!-- <select name="group-location" id="group-location">
+	<option value=""><!?php esc_html_e( "Select Group $location_label", 'buddyboss' ); ?></option>
+	<!?php foreach($all_locations as $key=>$location){ ?>
+		<option value="<!?php echo $location; ?>" <!?php echo ($key == $group_location)?"selected":"" ?>><!?php echo $location; ?></option>
+	<!?php } ?>
+</select> -->

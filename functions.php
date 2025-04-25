@@ -42,9 +42,6 @@ function tlcf_enqueue_scripts() {
     $locations = get_option('socio_connect_locations', array());
 
     $values = array_values($locations);
-    // $values = implode("\r\n",array_values($locations));
-
-
 
 	$js_url = get_stylesheet_directory_uri() . '/custom-fields.js';	
 
@@ -56,8 +53,69 @@ function tlcf_enqueue_scripts() {
         'values' => $values
     ));
     
+    $course_locations = get_post_meta($_GET['course_id'], 'location2', true);
+
+	// Pass AJAX URL and other data to JavaScript
+    wp_localize_script('tlcf-custom-fields-js', 'tlcf_ajax_object', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'course_id' => $_GET['course_id'], // Assumes this is loaded on a single course page
+        'nonce' => wp_create_nonce('save_course_locations_nonce'),
+        'course_locations' => $course_locations
+    ));
+
 }
 add_action( 'tutor_after_course_builder_load', 'tlcf_enqueue_scripts' );
+
+function tlcf_save_course_locations() {
+    // Verify nonce for security
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'save_course_locations_nonce')) {
+        wp_send_json_error(array('message' => 'Security check failed.'));
+    }
+    
+    // Check if course ID is provided
+    if (!isset($_POST['course_id']) || empty($_POST['course_id'])) {
+        wp_send_json_error(array('message' => 'Course ID is required.'));
+    }
+    
+    $course_id = intval($_POST['course_id']);
+    $locations = isset($_POST['locations']) ? $_POST['locations'] : array();
+    
+    // Sanitize locations array
+    $sanitized_locations = array();
+    foreach ($locations as $location) {
+        $sanitized_locations[] = sanitize_text_field($location);
+    }
+    
+    // Save locations as course meta
+    update_post_meta($course_id, 'location2', $sanitized_locations);
+    
+    wp_send_json_success(array('message' => 'Locations saved successfully.'));
+}
+add_action('wp_ajax_save_course_locations', 'tlcf_save_course_locations');
+// For non-logged in users (if needed)
+add_action('wp_ajax_nopriv_save_course_locations', 'tlcf_save_course_locations');
+
+
+function tlcf_get_course_locations(){
+    // Check if course ID is provided
+    if (!isset($_POST['course_id']) || empty($_POST['course_id'])) {
+        wp_send_json_error(array('message' => 'Course ID is required.'));
+    }
+    
+    $course_id = intval($_POST['course_id']);
+	$locations = get_post_meta($course_id, 'location2', true);
+	
+    wp_send_json_success(
+		array(
+			'success' => true,
+			'locations' => $locations
+			)
+	);
+}
+
+add_action('wp_ajax_get_course_locations', 'tlcf_get_course_locations');
+add_action('wp_ajax_nopriv_get_course_locations', 'tlcf_get_course_locations');
+
 
 function tlcf_save_course_meta( int $post_id ) {
 	$course_location = sanitize_text_field( wp_unslash( $_POST['course_location'] ) ?? '' );
@@ -180,6 +238,8 @@ add_action('admin_init', 'socio_connect_register_settings');
  * Admin page for location management
  */
 function socio_connect_locations_page() {
+    global $wpdb;
+	$table_name = $wpdb->prefix . 'bp_xprofile_fields';
 
     $assigned_index = 2;
 
@@ -216,6 +276,18 @@ function socio_connect_locations_page() {
                 Tribe__Settings_Manager::set_options( $ecp_options );
 
 
+                $option_order = $wpdb->get_var(
+					$wpdb->prepare(
+						"SELECT option_order FROM $table_name 
+						WHERE group_id = 1 AND parent_id = 4 AND type = 'option'
+						ORDER BY id DESC LIMIT 1",
+					)
+				);
+
+				$wpdb->insert(
+					$table_name,
+					array('group_id' => 1, 'parent_id' => 4, 'type' => 'option', 'name' => "$key", 'description' => '','option_order' => $option_order+1 )
+				);
 
                 echo '<div class="notice notice-success is-dismissible"><p>Location added successfully!</p></div>';
             }
@@ -247,7 +319,12 @@ function socio_connect_locations_page() {
             Tribe__Settings_Manager::set_options( $ecp_options );
 
 
-
+            $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE $table_name SET name='$label'	
+					 WHERE  id=4"
+				)
+			);
 
             echo '<div class="notice notice-success is-dismissible"><p>Location label updated successfully!</p></div>';
         }
@@ -282,7 +359,12 @@ function socio_connect_locations_page() {
 
                 Tribe__Settings_Manager::set_options( $ecp_options );
 
-
+                $wpdb->query(
+					$wpdb->prepare(
+						"DELETE FROM $table_name 
+						WHERE group_id = 1 AND parent_id = 4 AND type = 'option' AND name = '$key'",
+					)
+				);
 
                 echo '<div class="notice notice-success is-dismissible"><p>Location deleted successfully!</p></div>';
             }
@@ -326,6 +408,12 @@ function socio_connect_locations_page() {
                 Tribe__Settings_Manager::set_options( $ecp_options );
 
 
+                $wpdb->query(
+					$wpdb->prepare(
+						"UPDATE $table_name SET name= '$new_value'
+						WHERE group_id = 1 AND parent_id = 4 AND type = 'option' AND name = '$old_key'",
+					)
+				);
 
 
 

@@ -57,11 +57,6 @@ if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) {
 		$user_location = xprofile_get_field_data(32,get_current_user_id());
 		
 
-		// echo $location_label;
-		// print_r($user_location);
-		
-		// exit;
-
 		$groups_in_location = [];
 
 		if(isset($_GET['location']) && ($_GET['location'] === '---')){

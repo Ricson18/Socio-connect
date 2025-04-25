@@ -279,14 +279,14 @@ function socio_connect_locations_page() {
                 $option_order = $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT option_order FROM $table_name 
-						WHERE group_id = 1 AND parent_id = 4 AND type = 'option'
+						WHERE group_id = 1 AND parent_id = 32 AND type = 'option'
 						ORDER BY id DESC LIMIT 1",
 					)
 				);
 
 				$wpdb->insert(
 					$table_name,
-					array('group_id' => 1, 'parent_id' => 4, 'type' => 'option', 'name' => "$key", 'description' => '','option_order' => $option_order+1 )
+					array('group_id' => 1, 'parent_id' => 32, 'type' => 'option', 'name' => "$key", 'description' => '','option_order' => $option_order+1 )
 				);
 
                 echo '<div class="notice notice-success is-dismissible"><p>Location added successfully!</p></div>';
@@ -322,7 +322,7 @@ function socio_connect_locations_page() {
             $wpdb->query(
 				$wpdb->prepare(
 					"UPDATE $table_name SET name='$label'	
-					 WHERE  id=4"
+					 WHERE  id=32"
 				)
 			);
 
@@ -362,7 +362,7 @@ function socio_connect_locations_page() {
                 $wpdb->query(
 					$wpdb->prepare(
 						"DELETE FROM $table_name 
-						WHERE group_id = 1 AND parent_id = 4 AND type = 'option' AND name = '$key'",
+						WHERE group_id = 1 AND parent_id = 32 AND type = 'option' AND name = '$key'",
 					)
 				);
 
@@ -411,7 +411,7 @@ function socio_connect_locations_page() {
                 $wpdb->query(
 					$wpdb->prepare(
 						"UPDATE $table_name SET name= '$new_value'
-						WHERE group_id = 1 AND parent_id = 4 AND type = 'option' AND name = '$old_key'",
+						WHERE group_id = 1 AND parent_id = 32 AND type = 'option' AND name = '$old_key'",
 					)
 				);
 

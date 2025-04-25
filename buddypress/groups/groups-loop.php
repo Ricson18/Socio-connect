@@ -63,6 +63,8 @@ if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) {
 			foreach($groups_query as $group){
 				$group_location = groups_get_groupmeta( $group->group_id, 'group-location', true);
 
+				print_r($group_location);
+				
 				if( is_array($group_location) ){
 					if( !empty($group_location) && in_array($user_location,$group_location) )
 						$groups_in_location[] = $group->group_id;

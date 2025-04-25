@@ -157,14 +157,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         
         // Register a textarea field
-        Tutor.CourseBuilder.Basic.registerField("after_description", {
-            name: "course_location",
-            type: "select",
-            label: "Course Location",
-            placeholder: "Select Location...",
-            priority: 20,
-            options: options
-        });
+        // Tutor.CourseBuilder.Basic.registerField("after_description", {
+        //     name: "course_location",
+        //     type: "select",
+        //     label: "Course Location",
+        //     placeholder: "Select Location...",
+        //     priority: 20,
+        //     options: options
+        // });
 
         // Register a number field
         Tutor.CourseBuilder.Curriculum.Lesson.registerField("bottom_of_sidebar", {

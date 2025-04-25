@@ -96,6 +96,7 @@ add_action('wp_ajax_save_course_locations', 'tlcf_save_course_locations');
 add_action('wp_ajax_nopriv_save_course_locations', 'tlcf_save_course_locations');
 
 
+
 function tlcf_get_course_locations(){
     // Check if course ID is provided
     if (!isset($_POST['course_id']) || empty($_POST['course_id'])) {
@@ -103,7 +104,7 @@ function tlcf_get_course_locations(){
     }
     
     $course_id = intval($_POST['course_id']);
-	$locations = get_post_meta($course_id, 'location2', true);
+	$locations = get_post_meta($course_id, 'course_location', true);
 	
     wp_send_json_success(
 		array(

@@ -56,6 +56,10 @@ if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) {
 		$location_label = socio_connect_get_location_label();
 		$user_location = xprofile_get_field_data($location_label,get_current_user_id());
 		
+
+		echo $user_location;
+		
+		exit;
 		
 		$groups_in_location = [];
 
@@ -64,10 +68,9 @@ if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) {
 				$group_location = groups_get_groupmeta( $group->group_id, 'group-location', true);
 
 
-				echo $user_location.'x';
-				print_r($group_location);
+				// print_r($group_location);
 
-				echo "<br>";
+				// echo "<br>";
 
 				if( is_array($group_location) ){
 					if( !empty($group_location) && in_array($user_location,$group_location) )

@@ -53,7 +53,7 @@ function tlcf_enqueue_scripts() {
         'values' => $values
     ));
     
-    $course_locations = get_post_meta($_GET['course_id'], 'location2', true);
+    $course_locations = get_post_meta($_GET['course_id'], 'course_location', true);
 
 	// Pass AJAX URL and other data to JavaScript
     wp_localize_script('tlcf-custom-fields-js', 'tlcf_ajax_object', array(
@@ -87,7 +87,7 @@ function tlcf_save_course_locations() {
     }
     
     // Save locations as course meta
-    update_post_meta($course_id, 'location2', $sanitized_locations);
+    update_post_meta($course_id, 'course_location', $sanitized_locations);
     
     wp_send_json_success(array('message' => 'Locations saved successfully.'));
 }
@@ -128,12 +128,12 @@ add_action( 'save_post_courses', 'tlcf_save_course_meta' );
 
 function add_location_to_course($default_course_sidebar_meta, $course_id){
 	// $course_id   = $data['ID'];
-	$course_location = get_post_meta( $course_id, 'tlcf_course_location', true );
+	$course_location = get_post_meta( $course_id, 'course_location', true );
 	if ( $course_location ) {
 		$default_course_sidebar_meta[] = [
 			'icon_class' => 'fa fa-map-marker fa-lg fa-fw',
 			'label' => 'Location',
-			'value' => $course_location
+			'value' => implode(', ',$course_location)
 		];
 	}
 
@@ -269,7 +269,7 @@ function socio_connect_locations_page() {
                 $ecp_options['custom-fields'][$assigned_index] = [
                     'name'   => '_ecp_custom_' . $assigned_index,
                     'label'  => $label,
-                    'type'   => 'dropdown',
+                    'type'   => 'checkbox',
                     'values' => $values
                 ];
 
@@ -312,7 +312,7 @@ function socio_connect_locations_page() {
             $ecp_options['custom-fields'][$assigned_index] = [
                 'name'   => '_ecp_custom_' . $assigned_index,
                 'label'  => $label,
-                'type'   => 'dropdown',
+                'type'   => 'checkbox',
                 'values' => $values
             ];
 
@@ -353,7 +353,7 @@ function socio_connect_locations_page() {
                 $ecp_options['custom-fields'][$assigned_index] = [
                     'name'   => '_ecp_custom_' . $assigned_index,
                     'label'  => $label,
-                    'type'   => 'dropdown',
+                    'type'   => 'checkbox',
                     'values' => $values//"A1\r\nA5\r\nA3\r\nA4"
                 ];
 
@@ -401,7 +401,7 @@ function socio_connect_locations_page() {
                 $ecp_options['custom-fields'][$assigned_index] = [
                     'name'   => '_ecp_custom_' . $assigned_index,
                     'label'  => $label,
-                    'type'   => 'dropdown',
+                    'type'   => 'checkbox',
                     'values' => $values//"A1\r\nA5\r\nA3\r\nA4"
                 ];
 

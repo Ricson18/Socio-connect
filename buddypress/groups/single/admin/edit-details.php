@@ -41,10 +41,12 @@ if ( $bp_is_group_create ) : ?>
 		? $bp->groups->current_group->id
 		: '';
 		
-	$group_location = groups_get_groupmeta( $ggroup_id, 'group-location');
+	$group_location = groups_get_groupmeta( $ggroup_id, 'group-location', true);
 
 	$all_locations = socio_connect_get_locations();
 
+
+	
 	// $all_locations = [
 	// 	'Canada' => "Canada",
 	// 	'United States' => "United States",
@@ -54,15 +56,34 @@ if ( $bp_is_group_create ) : ?>
 ?>
 
 
+
 <div class="group-location-checkboxes">
 	<div class="checkbox-label"><?php esc_html_e( 'Select Group Location', 'buddyboss' ); ?></div>
 	<?php foreach($all_locations as $key=>$location){ ?>
 		<label class="location-checkbox">
-			<input type="checkbox" name="group-location[]" value="<?php echo $location; ?>" <?php echo ($key == $group_location)?"checked":"" ?>>
+			<?php if(is_array($group_location)){ ?>
+				<input type="checkbox" name="group-location[]" value="<?php echo $location; ?>" <?php echo in_array($key, $group_location)?"checked":"" ?>>
+			<?php }else{ ?>
+				<input type="checkbox" name="group-location[]" value="<?php echo $location; ?>" <?php echo ($key == $group_location)?"checked":"" ?>>
+			<?php } ?>
+
+			<!-- <input type="checkbox" name="group-location[]" value="<!?php echo $location; ?>" <!?php echo ($key == $group_location)?"checked":"" ?>> -->
 			<?php echo $location; ?>
 		</label>
 	<?php } ?>
 </div>
+
+
+
+<!-- <div class="group-location-checkboxes">
+	<div class="checkbox-label"><!?php esc_html_e( 'Select Group Location', 'buddyboss' ); ?></div>
+	<!?php foreach($all_locations as $key=>$location){ ?>
+		<label class="location-checkbox">
+			<input type="checkbox" name="group-location[]" value="<!?php echo $location; ?>" <!?php echo ($key == $group_location)?"checked":"" ?>>
+			<!?php echo $location; ?>
+		</label>
+	<!?php } ?>
+</div> -->
 
 
 <!-- <select name="group-location" id="group-location">

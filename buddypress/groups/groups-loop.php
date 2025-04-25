@@ -53,30 +53,51 @@ if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) {
 			ORDER BY g.date_created DESC"
 		);
 		
-		$user_location = xprofile_get_field_data('location',get_current_user_id());
+		$location_label = socio_connect_get_location_label();
+		$user_location = xprofile_get_field_data($location_label,get_current_user_id());
+		
 		
 		$groups_in_location = [];
 
 		if(isset($_GET['location']) && ($_GET['location'] === '---')){
 			foreach($groups_query as $group){
-				$group_location = groups_get_groupmeta( $group->group_id, 'group-location');
-				if(!empty($group_location) && ($group_location==$user_location))
-					$groups_in_location[] = $group->group_id;
+				$group_location = groups_get_groupmeta( $group->group_id, 'group-location', true);
+
+				if( is_array($group_location) ){
+					if( !empty($group_location) && in_array($user_location,$group_location) )
+						$groups_in_location[] = $group->group_id;
+				}else{
+					if(!empty($group_location) && ($group_location==$user_location))
+						$groups_in_location[] = $group->group_id;
+				}
 			}
 		}else if(isset($_GET['location']) && ($_GET['location'] === 'All')){
 			foreach($groups_query as $group)
 				$groups_in_location[] = $group->group_id;
 		}else if(isset($_GET['location'])){
 			foreach($groups_query as $group){
-				$group_location = groups_get_groupmeta( $group->group_id, 'group-location');
-				if( $_GET['location'] === $group_location)
-					$groups_in_location[] = $group->group_id;
+				$group_location = groups_get_groupmeta( $group->group_id, 'group-location', true);
+
+				if( is_array($group_location) ){
+					if( !empty($group_location) && in_array($_GET['location'],$group_location) )
+						$groups_in_location[] = $group->group_id;
+				}
+				else{
+					if( $_GET['location'] === $group_location)
+						$groups_in_location[] = $group->group_id;
+				}
 			}
 		}else{
 			foreach($groups_query as $group){
-				$group_location = groups_get_groupmeta( $group->group_id, 'group-location');
-				if(!empty($group_location) && ($group_location==$user_location))
-					$groups_in_location[] = $group->group_id;
+				$group_location = groups_get_groupmeta( $group->group_id, 'group-location', true);
+
+				if( is_array($group_location) ){
+					if( !empty($group_location) && in_array($user_location,$group_location) )
+						$groups_in_location[] = $group->group_id;
+				}else{
+					if(!empty($group_location) && ($group_location==$user_location))
+						$groups_in_location[] = $group->group_id;
+				}
 			}
 		}
 

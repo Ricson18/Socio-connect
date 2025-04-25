@@ -63,7 +63,8 @@ if ( empty( $disable_event_search ) ) {
 
 		<div class="tribe-events-calendar-list">
 			<?php 
-			$user_location = xprofile_get_field_data('location',get_current_user_id());
+			$location_label = socio_connect_get_location_label();
+			$user_location = xprofile_get_field_data($location_label,get_current_user_id());
 			$location_events = [];
 
 			// foreach($events as $event){
@@ -75,7 +76,8 @@ if ( empty( $disable_event_search ) ) {
 			if(isset($_GET['location']) && ($_GET['location'] === '---')){
 				foreach($events as $event){
 					$fields = tribe_get_custom_fields( $event->ID );
-					if( $user_location === $fields['Location'])
+					// if( $user_location === $fields['Location'])
+					if( !empty($fields[$location_label]) && (strpos($fields[$location_label], $user_location)!==false) )
 						$location_events[] = $event;
 				}
 			}else if(isset($_GET['location']) && ($_GET['location'] === 'All')){
@@ -83,13 +85,15 @@ if ( empty( $disable_event_search ) ) {
 			}else if(isset($_GET['location'])){
 				foreach($events as $event){
 					$fields = tribe_get_custom_fields( $event->ID );
-					if( $_GET['location'] === $fields['Location'])
+					// if( $_GET['location'] === $fields['Location'])
+					if( !empty($fields[$location_label]) && (strpos($fields[$location_label], $_GET['location'])!==false) )
 						$location_events[] = $event;
 				}
 			}else{
 				foreach($events as $event){
 					$fields = tribe_get_custom_fields( $event->ID );
-					if( $user_location === $fields['Location'])
+					// if( $user_location === $fields['Location'])
+					if( !empty($fields[$location_label]) && (strpos($fields[$location_label], $user_location)!==false) )
 						$location_events[] = $event;
 				}
 			}

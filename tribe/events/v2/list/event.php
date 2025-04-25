@@ -47,7 +47,8 @@ $event_classes = tribe_get_post_class( [ 'tribe-events-calendar-list__event', 't
 							</span> 
 							<span style="font-size:12px;"><!?php echo $fields['Location']; ?></span>
 						</span>
-					<!?php } ?>
+					<!?php } ?-->
+					
 					
 					<?php $this->template( 'list/event/title', [ 'event' => $event ] ); ?>
 

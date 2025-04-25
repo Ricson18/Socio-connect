@@ -102,7 +102,7 @@ $all_courses_ids = $wpdb->get_col($all_courses_query);
 
 // $user_location = xprofile_get_field_data('location',get_current_user_id());	
 $location_label = socio_connect_get_location_label();
-$user_location = xprofile_get_field_data($location_label,get_current_user_id());
+$user_location = xprofile_get_field_data(32,get_current_user_id());
 
 // echo "$course_location == $user_location";
 

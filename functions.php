@@ -597,3 +597,47 @@ function socio_connect_get_locations() {
 function socio_connect_get_location_label() {
     return get_option('socio_connect_location_label', 'Location');
 }
+
+
+
+
+function bp_groups_admin_edit_metabox_group_location( $item ) {
+
+    $location_label = socio_connect_get_location_label();
+    add_meta_box( 'bp_group_locations', __( "Group $location_label", 'buddyboss' ), 
+        function(){
+            $ggroup_id = isset( $_GET['gid'] )
+                ? $_GET['gid']
+                : '';
+                
+            if(isset($_POST['group-location'])){
+        		groups_update_groupmeta( $ggroup_id, 'group-location', $_POST['group-location'] );
+            }
+
+            $location_label = socio_connect_get_location_label();
+            $group_location = groups_get_groupmeta( $ggroup_id, 'group-location', true);
+
+            $all_locations = socio_connect_get_locations();
+            ?>
+            <div class="group-location-checkboxes">
+                <div class="checkbox-label"><?php esc_html_e( "Select Group $location_label", 'buddyboss' ); ?></div>
+                <?php foreach($all_locations as $key=>$location){ ?>
+                    <label class="location-checkbox">
+                        <?php if(is_array($group_location)){ ?>
+                            <input type="checkbox" name="group-location[]" value="<?php echo $location; ?>" <?php echo in_array($key, $group_location)?"checked":"" ?>>
+                        <?php }else{ ?>
+                            <input type="checkbox" name="group-location[]" value="<?php echo $location; ?>" <?php echo ($key == $group_location)?"checked":"" ?>>
+                        <?php } ?>
+                        <?php echo $location; ?>
+                    </label>
+                <?php } ?>
+            </div>
+
+            
+            <?php
+        }, get_current_screen()->id, 'normal', 'core' );
+}
+
+add_action('bp_groups_admin_meta_boxes', 'bp_groups_admin_edit_metabox_group_location');
+
+
